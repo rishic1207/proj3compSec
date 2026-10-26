@@ -1,0 +1,15 @@
+Fuzzing ./targetCov with RNG seed 115064444
+[0s] test 1: new coverage from 'v31' (4 edges, 1 seeds)
+[1s] test 69: new coverage from 'S31' (5 edges, 2 seeds)
+[5s] test 1535: new coverage from 'S01' (6 edges, 3 seeds)
+
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 53 30 73
+Crash-inducing test case (text): S0s
+Replay with: ./targetCov 'S0s'
+Number of test cases: 1710
+Wall clock time: 6 seconds
+Seeds in pool: 3, edges covered: 6
+RNG seed: 115064444
+Raw input saved to crash.bin

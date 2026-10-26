@@ -1,0 +1,23 @@
+Fuzzing ./targetCovLoop with RNG seed 3680068797
+[0s] test 1: new coverage from '80A' (8 edges, max hits 3, 1 seeds)
+[0s] test 2: new coverage from '8HA' (8 edges, max hits 3, 2 seeds)
+[0s] test 4: new coverage from 'NHA' (8 edges, max hits 3, 3 seeds)
+[0s] test 5: new coverage from 'k0A' (10 edges, max hits 3, 4 seeds)
+[0s] test 13: new coverage from 'kxA' (10 edges, max hits 3, 5 seeds)
+[0s] test 15: new coverage from 'kxr' (10 edges, max hits 3, 6 seeds)
+[0s] test 103: new coverage from 'SHA' (12 edges, max hits 44, 7 seeds)
+[0s] test 131: new coverage from 'SDA' (12 edges, max hits 48, 8 seeds)
+[0s] test 132: new coverage from '804' (12 edges, max hits 48, 9 seeds)
+[0s] test 138: new coverage from 'S7A' (12 edges, max hits 54, 10 seeds)
+[0s] test 210: new coverage from 'S0A' (13 edges, max hits 61, 11 seeds)
+
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 53 30 73
+Crash-inducing test case (text): S0s
+Replay with: ./targetCovLoop 'S0s'
+Number of test cases: 233
+Wall clock time: 0 seconds
+Seeds in pool: 11, edges covered: 13, max edge hit count: 61
+RNG seed: 3680068797
+Raw input saved to crash.bin

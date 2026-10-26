@@ -1,0 +1,20 @@
+Fuzzing ./target with RNG seed 303406749
+[22s] 10000 test cases, 455/s
+[44s] 20000 test cases, 455/s
+[67s] 30000 test cases, 448/s
+[89s] 40000 test cases, 449/s
+[111s] 50000 test cases, 450/s
+[133s] 60000 test cases, 451/s
+[155s] 70000 test cases, 452/s
+[176s] 80000 test cases, 455/s
+[198s] 90000 test cases, 455/s
+
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 71 61 4d
+Crash-inducing test case (text): qaM
+Replay with: ./target $'\x71\x61\x4d'
+Number of test cases: 93720
+Wall clock time: 206 seconds
+RNG seed: 303406749
+Raw input saved to crash.bin

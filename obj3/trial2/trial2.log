@@ -1,0 +1,70 @@
+Fuzzing ./target with RNG seed 441360028
+[22s] 10000 test cases, 455/s
+[44s] 20000 test cases, 455/s
+[66s] 30000 test cases, 455/s
+[88s] 40000 test cases, 455/s
+[110s] 50000 test cases, 455/s
+[132s] 60000 test cases, 455/s
+[154s] 70000 test cases, 455/s
+[176s] 80000 test cases, 455/s
+[198s] 90000 test cases, 455/s
+[219s] 100000 test cases, 457/s
+[240s] 110000 test cases, 458/s
+[262s] 120000 test cases, 458/s
+[283s] 130000 test cases, 459/s
+[304s] 140000 test cases, 461/s
+[326s] 150000 test cases, 460/s
+[347s] 160000 test cases, 461/s
+[368s] 170000 test cases, 462/s
+[389s] 180000 test cases, 463/s
+[410s] 190000 test cases, 463/s
+[432s] 200000 test cases, 463/s
+[452s] 210000 test cases, 465/s
+[474s] 220000 test cases, 464/s
+[494s] 230000 test cases, 466/s
+[514s] 240000 test cases, 467/s
+[535s] 250000 test cases, 467/s
+[553s] 260000 test cases, 470/s
+[571s] 270000 test cases, 473/s
+[590s] 280000 test cases, 475/s
+[608s] 290000 test cases, 477/s
+[626s] 300000 test cases, 479/s
+[644s] 310000 test cases, 481/s
+[663s] 320000 test cases, 483/s
+[681s] 330000 test cases, 485/s
+[699s] 340000 test cases, 486/s
+[718s] 350000 test cases, 487/s
+[736s] 360000 test cases, 489/s
+[754s] 370000 test cases, 491/s
+[773s] 380000 test cases, 492/s
+[792s] 390000 test cases, 492/s
+[810s] 400000 test cases, 494/s
+[828s] 410000 test cases, 495/s
+[847s] 420000 test cases, 496/s
+[865s] 430000 test cases, 497/s
+[884s] 440000 test cases, 498/s
+[902s] 450000 test cases, 499/s
+[920s] 460000 test cases, 500/s
+[939s] 470000 test cases, 501/s
+[957s] 480000 test cases, 502/s
+[975s] 490000 test cases, 503/s
+[994s] 500000 test cases, 503/s
+[1012s] 510000 test cases, 504/s
+[1031s] 520000 test cases, 504/s
+[1049s] 530000 test cases, 505/s
+[1067s] 540000 test cases, 506/s
+[1085s] 550000 test cases, 507/s
+[1104s] 560000 test cases, 507/s
+[1122s] 570000 test cases, 508/s
+[1140s] 580000 test cases, 509/s
+[1159s] 590000 test cases, 509/s
+
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 71 61 4d
+Crash-inducing test case (text): qaM
+Replay with: ./target $'\x71\x61\x4d'
+Number of test cases: 591858
+Wall clock time: 1162 seconds
+RNG seed: 441360028
+Raw input saved to crash.bin

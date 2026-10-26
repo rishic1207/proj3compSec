@@ -1,0 +1,11 @@
+# built programs and course-provided binaries
+fuzzer
+target
+pol
+targetCov
+targetCovLoop
+*.o
+# per-run output
+cov.bin
+crash.bin
+.venv/
