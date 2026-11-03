@@ -7,10 +7,17 @@ Average wall clock time: 5 seconds
 Average wall clock time relative to Objective 3: 0.0098 times
 Std. Dev. in wall clock time: 2 seconds
 Std. Dev. in wall clock time relative to Objective 3: 0.0051 times
-Pre question 1: Replace a random character, insert or delete characters, swap characters, splice parts of two seeds together, or insert values from a dictionary of constants found in the program.
-Pre question 2: Small mutations keep most of what made the seed interesting but explore slowly; large mutations explore more widely but often destroy the seed's progress, making the fuzzer behave more like random generation.
-Pre question 3: Compiler instrumentation (like SanitizerCoverage) is fast but needs source code; binary instrumentation or emulation (like QEMU) works without source but is slower; hardware tracing (like Intel PT) is fast but complex to set up and decode.
-Pre question 4: Far fewer test cases and less time, because coverage lets the fuzzer keep inputs that get one character right and build on them instead of guessing all three characters at once.
-Post question 1: About 0.005 times the test cases of Objective 3. Each correct character shows up as new edge coverage, so the fuzzer solves the input one character at a time (roughly 62 tries per character) instead of searching all 62^3 combinations. Times are measured in whole seconds, so the time ratios are rough.
-Post question 2: Prefer seeds that made the most progress instead of picking uniformly, execute test cases faster (for example fork/exec instead of system()), and measure time more precisely than whole seconds.
+
+Pre question 1: Change one random character, swap characters, add or remove characters
+
+Pre question 2: If you change a little it keeps the progress the seed made but explores more slowly. If you change it a lot will make it explore more but can throw the progress away
+
+Pre question 3: The complier can add tracking code to the program which is fast but needs the source code. Other tools can track a program without the source code but they’re slower
+
+Pre question 4: It'll be fewer test cases and fewer time because the fuzzer can keep parts of the input that it got right and build upon it
+
+Post question 1: It took 200 times fewer test cases than objective 3, mainly because the fuzzer was able to tell when it got a character right so it solved it one character at a time 
+
+Post question 2: Pick seeds that made the most progress and run tests faster
+
 Source code: include in submission archive

@@ -11,3 +11,5 @@ Post question 1: There was a lot of variation, as trials had between about 15 mi
 Post question 2: A single run can vary, as it could be a lucky or unlucky run. This means comparisons based on one run are unreliable
 
 Post question 3: Run more trials and use statistics tests like the Mann-Whitney U-test to check if the results are reliable
+
+Source code: include in submission archive

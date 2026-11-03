@@ -8,8 +8,13 @@ Average wall clock time: 7 seconds
 Average wall clock time relative to Objective 4: 1.4 times
 Std. Dev. in wall clock time: 4 seconds
 Std. Dev. in wall clock time relative to Objective 4: 2.0 times
-Pre question 1: The new target is harder, since the middle character must make the loop run exactly 61 times, so it may take more test cases; hit-count feedback should still make it solvable by rewarding inputs that run the loop more times.
-Pre question 2: trace-pc-guard calls a callback function on every edge, while inline 8-bit counters just increment a byte directly in the instrumented code, so inline counters should have lower overhead. In objdump, the first shows a call instruction at each edge and the second shows an inline increment.
-Post question 1: About 1.94 times the test cases and 1.4 times the time of Objective 4. Because both the target and the feedback changed, the difference cannot be attributed to hit counts alone; what hit counts clearly did is guide the loop count upward step by step, which edge coverage alone could not do on this target. Isolating the effect would require running the Objective 4 fuzzer on targetCovLoop.
-Post question 2: Prefer seeds with the highest loop hit counts, focus mutations on the character that is still changing, and execute test cases faster than system().
+
+Pre question 1: The new target is harder, so it might take more test cases in comparison to objective 4. Tracking how many times the loop runs should help the fuzzer get closer
+
+Pre question 2: trace-pc-guard calls a function each time, while 8-bit counters just add 1 to a counter. So 8-bit counters should be faster.
+
+Post question 1: It took twice as many test cases as objective 4. The target and coverage both changed so we can’t say the difference was only because of hit counts
+
+Post question 2: Pick seeds that made the loop run the most and run test cases faster.
+
 Source code: include in submission archive

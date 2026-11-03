@@ -7,9 +7,15 @@ Average wall clock time: 510 seconds
 Average wall clock time relative to Objective 2: 0.0087 times
 Std. Dev. in wall clock time: 393 seconds
 Std. Dev. in wall clock time relative to Objective 2: 0.015 times
-Pre question 1: Far fewer test cases, because the grammar shrinks the search space from about 254^3 = 16.4 million inputs to 62^3 = 238,328, roughly 69 times smaller.
-Pre question 2: Wall clock time should drop by about the same factor, since each test case still costs about the same to execute.
-Post question 1: The average of 246,934 test cases is close to 238,328, the size of the grammar's search space, which is what random guessing predicts. The ratio to Objective 2 is not exactly 1/69 because a few trials of a random process are noisy.
-Post question 2: Grammar-based fuzzing is much faster at reaching well-formed inputs, but it never tests malformed inputs, so bugs in input validation or parsing of unexpected formats are missed. It also requires someone to know or write the grammar.
-Post question 3: Use feedback about which code each input executed, mutate inputs that made progress instead of generating from scratch, and execute test cases faster than system().
+
+Pre question 1: It would give fewer test cases because the fuzzer is only trying valid inputs
+
+Pre question 2: It will also take less time because there are far less test cases
+
+Post question 1: The results make sense, as the average is about 247,000 test cases which is close to the 238,000 valid inputs
+
+Post question 2: It finds the bugs faster but because it's only looking at valid inputs, it's missing bugs that are caused by bad inputs.
+
+Post question 3: Use feedback about what code each input reaches and build on inputs that made progress
+
 Source code: include in submission archive
