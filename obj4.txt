@@ -1,0 +1,16 @@
+Crash-inducing test case: S0s
+Average number of test cases: 1,253
+Average number of test cases relative to Objective 3: 0.0051 times
+Std. Dev. In number of test cases: 510
+Std. dev. in number of test cases relative to Objective 3: 0.0025 times
+Average wall clock time: 5 seconds
+Average wall clock time relative to Objective 3: 0.0098 times
+Std. Dev. in wall clock time: 2 seconds
+Std. Dev. in wall clock time relative to Objective 3: 0.0051 times
+Pre question 1: Replace a random character, insert or delete characters, swap characters, splice parts of two seeds together, or insert values from a dictionary of constants found in the program.
+Pre question 2: Small mutations keep most of what made the seed interesting but explore slowly; large mutations explore more widely but often destroy the seed's progress, making the fuzzer behave more like random generation.
+Pre question 3: Compiler instrumentation (like SanitizerCoverage) is fast but needs source code; binary instrumentation or emulation (like QEMU) works without source but is slower; hardware tracing (like Intel PT) is fast but complex to set up and decode.
+Pre question 4: Far fewer test cases and less time, because coverage lets the fuzzer keep inputs that get one character right and build on them instead of guessing all three characters at once.
+Post question 1: About 0.005 times the test cases of Objective 3. Each correct character shows up as new edge coverage, so the fuzzer solves the input one character at a time (roughly 62 tries per character) instead of searching all 62^3 combinations. Times are measured in whole seconds, so the time ratios are rough.
+Post question 2: Prefer seeds that made the most progress instead of picking uniformly, execute test cases faster (for example fork/exec instead of system()), and measure time more precisely than whole seconds.
+Source code: include in submission archive

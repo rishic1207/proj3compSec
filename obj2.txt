@@ -1,0 +1,13 @@
+Crash-inducing test case: qaM
+Average number of test cases: 29,708,273
+Std. Dev. number of test cases: 13,608,177
+Average wall clock time: 58534 seconds
+Std. Dev. wall clock time: 25727 seconds
+
+Pre question 1: I expect high variation because finding a single input that causes a crash within millions of possibilities by random guessing depends on luck, so some runs will find it much sooner than others
+
+Post question 1: There was a lot of variation, as trials had between about 15 million to 42 million test cases. This is because it’s random guessing, so some runs get lucky early and others take much longer
+
+Post question 2: A single run can vary, as it could be a lucky or unlucky run. This means comparisons based on one run are unreliable
+
+Post question 3: Run more trials and use statistics tests like the Mann-Whitney U-test to check if the results are reliable

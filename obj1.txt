@@ -1,0 +1,18 @@
+Crash-inducing test case: qaM (hex 71 61 4d)
+Number of test cases: 15,518,733
+Wall clock time: 31578 seconds
+
+
+Pre question 1: The test cases are created at random through a random length and random bytes so the fuzzer samples with replacement meaning it doesn't have to remember what test cases it's already created.
+
+Pre question 2: Yes, creating duplicates matters but only for execution time and not the correctness. They’re likely since random picks often repeat inputs already tried, especially for short lengths where there are fewer possible inputs
+
+Pre question 3: The fuzzer uses system() to run the target, like typing ./target ‘input’ in the terminal. The quotes keep the input exactly as it is.
+
+Post question 1: Black-box fuzzing only learns whether the program crashed, so you can’t tell when it’s getting closer to a bug
+
+Post question 2: You can give the fuzzer information about the target like the input format or which code each input executed
+
+Post question 3: Avoid retrying duplicate inputs and use the input format
+
+Source code: include in submission archive

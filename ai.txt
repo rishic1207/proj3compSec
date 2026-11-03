@@ -1,0 +1,199 @@
+AI tool: Claude
+
+Prompt:
+i need to get started on this project, how can i start
+
+Prompt:
+okay if im splitting this with a partner what should the split be
+
+Prompt:
+okay but ur saying things need to be done in sequential order right, can u order it in that sense
+
+Prompt:
+okay lets get started on my part, whats the first step
+
+Prompt:
+rishic@birch:~/proj2compSec$ wget https://courses.cs.vt.edu/~cs4264/static/fuzzing/target
+--2026-10-22 21:13:19--  https://courses.cs.vt.edu/~cs4264/static/fuzzing/target
+Resolving courses.cs.vt.edu (courses.cs.vt.edu)... 2001:468:c80:212a:1:7027:5729:8bb2, 198.82.184.52
+Connecting to courses.cs.vt.edu (courses.cs.vt.edu)|2001:468:c80:212a:1:7027:5729:8bb2|:443... connected.
+HTTP request sent, awaiting response... 503 Service Unavailable
+2026-10-22 21:13:19 ERROR 503: Service Unavailable.
+
+rishic@birch:~/proj2compSec$
+
+Prompt:
+okay so get me started on my part, i have target and pol downloaded now as well as the c file
+
+Prompt:
+how can i start running the tests after creating the trial folders
+
+Prompt:
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 71 61 4d
+Crash-inducing test case (text): qaM
+Replay with: ./target $'\x71\x61\x4d'
+Number of test cases: 15518733
+Wall clock time: 31578 seconds
+RNG seed: 4235882414
+Raw input saved to crash.bin
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 71 61 4d
+Crash-inducing test case (text): qaM
+Replay with: ./target $'\x71\x61\x4d'
+Number of test cases: 42648999
+Wall clock time: 82825 seconds
+RNG seed: 4236013486
+Raw input saved to crash.bin
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 71 61 4d
+Crash-inducing test case (text): qaM
+Replay with: ./target $'\x71\x61\x4d'
+Number of test cases: 30957086
+Wall clock time: 61199 seconds
+RNG seed: 1038184235
+Raw input saved to crash.bin
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 71 61 4d
+Crash-inducing test case (text): qaM
+Replay with: ./target $'\x71\x61\x4d'
+Number of test cases: 26220216
+Wall clock time: 52168 seconds
+RNG seed: 1035038507
+Raw input saved to crash.bin
+trial 4 didnt have this last part in it, so heres the whole log:
+
+Prompt:
+okay lets start obj3
+
+Prompt:
+what else is left for my parts of the project
+
+Prompt:
+how can the fuzzer tell which parts of the program an input reached and kee the inputs that got further
+
+Prompt:
+rishic@chestnut:/home$ cd
+rishic@chestnut:~$ ^C
+rishic@chestnut:~$ cd proj2compSec
+rishic@chestnut:~/proj2compSec$ cd obj4
+rishic@chestnut:~/proj2compSec/obj4$ chmod +x run_trials.sh stats.py
+rishic@chestnut:~/proj2compSec/obj4$ make
+gcc -O2 -Wall -Wextra -o fuzzer obj4.c
+clang -g -fsanitize-coverage=trace-pc-guard -c -o targetCov.o targetCov.c
+make: *** No rule to make target 'cov_handlers.c', needed by 'cov_handlers.o'.  Stop.
+
+Prompt:
+(.venv) rishic@holly:~/proj2compSec/obj4$ ./stats.py trial*/trial*.log
+trial10/trial10.log: input=S0s test_cases=507 time=2s
+trial1/trial1.log: input=S0s test_cases=1,630 time=5s
+trial2/trial2.log: input=S0s test_cases=563 time=2s
+trial3/trial3.log: input=S0s test_cases=1,083 time=4s
+trial4/trial4.log: input=S0s test_cases=2,096 time=7s
+trial5/trial5.log: input=S0s test_cases=1,502 time=6s
+trial6/trial6.log: input=S0s test_cases=1,240 time=5s
+trial7/trial7.log: input=S0s test_cases=863 time=4s
+trial8/trial8.log: input=S0s test_cases=1,340 time=5s
+trial9/trial9.log: input=S0s test_cases=1,710 time=6s
+
+All trials found the same input: yes
+Trials: 10
+Average number of test cases: 1,253
+Std. dev. number of test cases: 510
+Average wall clock time: 5 seconds
+Std. dev. wall clock time: 2 seconds
+(.venv) rishic@holly:~/proj2compSec/obj4$ ./targetCov '<the input>' ; echo "exit: $?"
+exit: 0
+(.venv) rishic@holly:~/proj2compSec/obj4$ cd ..
+(.venv) rishic@holly:~/proj2compSec$ cd obj3
+(.venv) rishic@holly:~/proj2compSec/obj3$ ./stats.py trial*/trial*.log
+trial1/trial1.log: input=qaM test_cases=89,880 time=197s
+trial2/trial2.log: input=qaM test_cases=591,858 time=1,162s
+trial3/trial3.log: input=qaM test_cases=93,720 time=206s
+trial4/trial4.log: input=qaM test_cases=245,534 time=527s
+trial5/trial5.log: input=qaM test_cases=213,678 time=460s
+
+All trials found the same input: yes
+Trials: 5
+Average number of test cases: 246,934
+Std. dev. number of test cases: 205,074
+Average wall clock time: 510 seconds
+Std. dev. wall clock time: 393 seconds
+(.venv) rishic@holly:~/proj2compSec/obj3$
+
+can u analyze the trials
+
+Prompt:
+(.venv) rishic@holly:~/proj2compSec/obj5$ cat targetCovLoop.c
+#include <stdio.h>
+#include <string.h>
+
+/* Order the permitted characters from 0 through 61. */
+static int alnum_index(unsigned char c) {
+    if (c >= '0' && c <= '9') return c - '0';
+    if (c >= 'A' && c <= 'Z') return 10 + c - 'A';
+    if (c >= 'a' && c <= 'z') return 36 + c - 'a';
+    return -1;
+}
+
+int eval(const char *input) {
+    if (strlen(input) < 3) return 1;
+
+    int first = alnum_index((unsigned char)input[0]);
+    int middle = alnum_index((unsigned char)input[1]);
+    int last = alnum_index((unsigned char)input[2]);
+
+    if (input[0] == 'S') {
+        /* '0' takes 61 trips; '1' takes 60; ...; 'z' takes none. */
+        unsigned int limit = 61u - (unsigned int)middle;
+        volatile unsigned int trips = 0;
+        for (unsigned int i = 0; i < limit; ++i) {
+            ++trips;
+        }
+
+        if (trips == 61u && input[2] == 's') {
+            __builtin_trap();
+        }
+    }
+
+    return 0;
+}
+
+int main(int argc, char **argv) {
+    if (argc != 2) {
+        printf("ERROR: must call the target with exactly one string command line argument.\n");
+        return 1;
+    }
+
+    return eval(argv[1]);
+}
+(.venv) rishic@holly:~/proj2compSec/obj5$
+
+Prompt:
+(.venv) rishic@holly:~/proj2compSec/obj5$ ./stats.py trial*/trial*.log
+trial10/trial10.log: input=S0s test_cases=772 time=3s
+trial1/trial1.log: input=S0s test_cases=3,607 time=11s
+trial2/trial2.log: input=S0s test_cases=297 time=1s
+trial3/trial3.log: input=S0s test_cases=3,651 time=11s
+trial4/trial4.log: input=S0s test_cases=2,253 time=7s
+trial5/trial5.log: input=S0s test_cases=233 time=0s
+trial6/trial6.log: input=S0s test_cases=2,233 time=7s
+trial7/trial7.log: input=S0s test_cases=4,025 time=12s
+trial8/trial8.log: input=S0s test_cases=3,381 time=10s
+trial9/trial9.log: input=S0s test_cases=3,833 time=11s
+
+All trials found the same input: yes
+Trials: 10
+Average number of test cases: 2,428
+Std. dev. number of test cases: 1,509
+Average wall clock time: 7 seconds
+Std. dev. wall clock time: 4 seconds
+(.venv) rishic@holly:~/proj2compSec/obj5$
+
+lets analyze these too
+
+
