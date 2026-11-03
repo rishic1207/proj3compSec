@@ -1,0 +1,12 @@
+Crash-inducing test case: S0s
+Average number of test cases: 1939
+Average number of test cases relative to Objective 5: 0.80 times
+Std. Dev. In number of test cases: 2118
+Std. dev. in number of test cases relative to Objective 5: 1.40 times
+Average wall clock time: 11 seconds
+Average wall clock time relative to Objective 5: 1.57 times
+Std. Dev. in wall clock time: 7 seconds
+Std. Dev. in wall clock time relative to Objective 5: 1.75 times
+Pre question 1: Replacing system() with fork/exec should reduce per-execution shell overhead, lowering wall-clock time. The number of tests to reach a crash should remain broadly similar, although random variation will affect each trial.
+Post question 1: All 10 trials found S0s. The mean was 1,939 test cases and 11 seconds. Comparison with Objective 5 requires its measured results; differences in test counts can reflect randomness, while fork/exec avoids launching a separate shell.
+Post question 2: A persistent target process or forkserver could reduce repeated startup costs while preserving test-case isolation.

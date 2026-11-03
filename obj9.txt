@@ -1,0 +1,7 @@
+Total number of possible edges: 28072
+Average number of edges covered: 5210.33
+Average number of test cases executed: 426793.00
+Std. Dev. of the number of test cases executed: 39062.09
+Std. Dev. of the number of edges covered: 7.09
+Post question 1: pdftotext is much larger and more complex than the small educational targets, containing many parsing and conversion branches, so instrumentation creates far more edge counters.
+Post question 2: Different programs require new input representations, suitable seed corpora and mutation strategies, different invocation options, coverage-buffer scaling, timeout tuning, and management of binary files and output artifacts.
