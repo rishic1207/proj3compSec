@@ -197,3 +197,357 @@ Std. dev. wall clock time: 4 seconds
 lets analyze these too
 
 
+AI Tool: ChatGPT
+
+I need your help walking me through objectives 6-9. My partner is responsible for parts1-5 and I will be doing 6-9. Help me implement everything I can do without any dependencies and explain what dependencies i have on obj 1-5.
+Here is my partner's Objective 5 code. Help me integrate it into Objectives 6–9 so everything works together.
+Help me implement Objective 6 by replacing system() with fork()/exec() while preserving the coverage-guided fuzzing functionality.
+Walk me through building Objective 7, including detecting multiple crashes, handling timeouts, killing and reaping processes, and continuing fuzzing after abnormal termination.
+Help me implement Objective 8 with seed loading from files, mutation, and saving coverage-increasing test cases to an interesting directory.
+Help me compile xpdf/pdftotext with Clang and SanitizerCoverage instrumentation for Objective 9.
+Help me modify the fuzzer to mutate binary PDF files and handle the larger coverage bitmap produced by pdftotext.
+Give me the exact commands to run the required 24-hour fuzzing experiments on rlogin and save the results.
+Help me analyze the trial logs and calculate the averages, standard deviations, throughput, crash counts, timeout counts, and coverage statistics.
+Help me independently replay all crash-inducing and timeout-inducing inputs and determine which findings reproduce.
+Generate the Objective 6–9 reports using my actual experimental measurements and the exact formatting required by the assignment
+Help me fix and verify the Makefiles so that each objective compiles and runs correctly on rlogin.
+Can you just double check that I answered everything properly. here are the deliverables for each obj -- for 6:
+What to submit: submit a plain text file containing your answers to the objective questions formatted as shown below (without the preceding bullet). Include your source file(s)
+along with your plain text file in the project submission archive.
+• Crash-inducing test case: ABC123
+• Average number of test cases: 1,234,567
+• Average number of test cases relative to Objective 5: 0.54 times
+• Std. Dev. In number of test cases: 123,456
+• Std. dev. in number of test cases relative to Objective 5: 0.54 times
+• Average wall clock time: 2700 seconds
+• Average wall clock time relative to Objective 5: 0.54 times
+• Std. Dev. in wall clock time: 234 seconds
+• Std. Dev. in wall clock time relative to Objective 5: 0.54 times
+• Pre question 1: A sentence or two.
+• Post question 1: A sentence or two.
+• Post question 2: A sentence or two.
+• Source code: include in submission archive
+for 7:
+What to submit: submit obj7.txt with your measurements and answers formatted as
+shown below (without the preceding bullet). Replace example values with your results,
+using zero or “none” where appropriate. Repeat the abnormal-input lines for every distinct
+finding. Include obj7.c, any updated coverage tracing source, and instructions for compiling
+and running your fuzzer in the project submission archive.
+18
+• Per-test-case timeout: 100 milliseconds
+• Random number generator seed: 12345
+• Rlogin node: node name
+• Number of test cases: 1,234,567
+• Wall clock time: 86,400 seconds
+• Test case throughput: 14.29 test cases per second
+• Total crash events: 120
+• Distinct crash-inducing inputs: 2
+• Total timeout events: 30
+• Distinct timeout-inducing inputs: 1
+• Crash-inducing test case: A1b; signal: SIGSEGV; occurrences: 70; first found: 12
+seconds; replay: same signal
+• Crash-inducing test case: C3d; signal: SIGABRT; occurrences: 50; first found: 45
+seconds; replay: same signal
+• Timeout-inducing test case: X2y; occurrences: 30; first found: 90 seconds; replay at
+100 milliseconds: timed out; replay at 1000 milliseconds: timed out
+• Pre question 1: A sentence or two.
+• Pre question 2: A sentence or two.
+• Pre question 3: A sentence or two.
+• Post question 1: A sentence or two.
+• Post question 2: A sentence or two.
+• Post question 3: A sentence or two.
+• Post question 4: A sentence or two.
+• Source code: include in submission archive
+for 8:
+What to submit: submit obj8.txt containing your measurements and answers formatted as shown below (without the preceding bullet). List every initial seed file and its contents, and report crash and timeout findings in the format used in Objective 7. Report the
+measurements from this single trial; averages and standard deviations across trials are not
+required. The values below are examples. Include obj8.c in the project submission archive
+(see Submission Checklist for details).
+• Number of trials: 1
+• Initial seed file: seed1.txt; contents: A1b
+• Initial seed file: seed2.txt; contents: C3d
+• Per-test-case timeout: 100 milliseconds
+• Random number generator seed: 12345
+• Rlogin node: node name
+• Number of test cases: 1,234,567
+• Wall clock time: 86,400 seconds
+• Test case throughput: 14.29 test cases per second
+• Pre question 1: A sentence or two.
+• Pre question 2: A sentence or two.
+• Pre question 3: A sentence or two.
+• Post question 1: A sentence or two.
+• Post question 2: A sentence or two.
+• Post question 3: A sentence or two.
+• Post question 4: A sentence or two.
+• Source code: include in submission archive
+
+for 9:
+What to submit: submit a plain text file containing your answers to the objective questions formatted as shown below (without the preceding bullet). Include your source file(s)
+along with your plain text file in the project submission archive (see Submission Checklist
+for details).
+• Total number of possible edges: 12,345
+• Average number of edges covered: 12,345
+• Average number of test cases executed: 1,234,567
+• Std. Dev. of the number of test cases executed: 123,456
+22
+• Std. Dev. of the number of edges covered: 123,456
+• Post question 1: A sentence or two.
+• Post question 2: A sentence or two.
+• Source code: include in submission archive
+
+scp: stat local ":ankur\\Downloads\\project3_obj6_to_obj9_integrated.tar.gz": No such file or directory
+[ankurg@maple project3]$ ls
+project3_obj6_to_obj9_integrated
+[ankurg@maple project3]$ cd project3_obj6_to_obj9_integrated/
+[ankurg@maple project3_obj6_to_obj9_integrated]$ ls
+project3_ready
+[ankurg@maple project3_obj6_to_obj9_integrated]$ cd project3_ready/
+[ankurg@maple project3_ready]$ ls
+LAUNCH.md  README.md  report_templates  srcFiles6  srcFiles7  srcFiles8  srcFiles9
+[ankurg@maple project3_ready]$ cd srcFiles6
+[ankurg@maple srcFiles6]$ make
+gcc -O2 -Wall -Wextra -D_POSIX_C_SOURCE=200809L -o fuzzer obj6.c runner.c
+clang -O1 -g -c -o cov_handlers.o cov_handlers.c
+clang -O1 -g -fsanitize-coverage=inline-8bit-counters -c -o targetCovLoop.o targetCovLoop.c
+clang -o targetCovLoop targetCovLoop.o cov_handlers.o
+[ankurg@maple srcFiles6]$ ls -lh
+total 71K
+-rw-r--r-- 1 ankurg Majors 2.3K Oct 29 18:08 cov_handlers.c
+-rw-r--r-- 1 ankurg Majors 7.4K Oct 29 18:10 cov_handlers.o
+-rw-r--r-- 1 ankurg Majors    3 Oct 29 18:08 crash.bin
+-rwxr-xr-x 1 ankurg Majors  19K Oct 29 18:10 fuzzer
+-rw-r--r-- 1 ankurg Majors  502 Oct 29 18:08 Makefile
+-rw-r--r-- 1 ankurg Majors 7.1K Oct 29 18:08 obj6.c
+-rw-r--r-- 1 ankurg Majors 3.1K Oct 29 18:08 runner.c
+-rw-r--r-- 1 ankurg Majors  321 Oct 29 18:08 runner.h
+-rw-r--r-- 1 ankurg Majors 1.3K Oct 29 18:08 stats.py
+-rwxr-xr-x 1 ankurg Majors  19K Oct 29 18:10 targetCovLoop
+-rw-r--r-- 1 ankurg Majors 1.2K Oct 29 18:08 targetCovLoop.c
+-rw-r--r-- 1 ankurg Majors 8.1K Oct 29 18:10 targetCovLoop.o
+[ankurg@maple srcFiles6]$ ./fuzzer ./targetCovLoop 12345
+Fuzzing ./targetCovLoop with RNG seed 12345
+[0s] test 1: new coverage from 'xNz' (3 edges, max hits 1, 1 seeds)
+[0s] test 3: new coverage from 'xcz' (4 edges, max hits 1, 2 seeds)
+[0s] test 14: new coverage from 'x2z' (5 edges, max hits 1, 3 seeds)
+[1s] test 114: new coverage from 'Scz' (8 edges, max hits 22, 4 seeds)
+[1s] test 115: new coverage from 'Saz' (8 edges, max hits 24, 5 seeds)
+[1s] test 119: new coverage from 'SSz' (8 edges, max hits 32, 6 seeds)
+[1s] test 143: new coverage from 'SJz' (8 edges, max hits 41, 7 seeds)
+[1s] test 156: new coverage from 'SEz' (8 edges, max hits 46, 8 seeds)
+[1s] test 177: new coverage from 'S4z' (8 edges, max hits 56, 9 seeds)
+[1s] test 244: new coverage from 'Szz' (9 edges, max hits 56, 10 seeds)
+[1s] test 379: new coverage from 'S1z' (9 edges, max hits 59, 11 seeds)
+[2s] test 567: new coverage from 'S0z' (9 edges, max hits 60, 12 seeds)
+
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 53 30 73
+Crash-inducing test case (text): S0s
+Replay with: ./targetCovLoop 'S0s'
+Number of test cases: 910
+Wall clock time: 2 seconds
+Seeds in pool: 12, edges covered: 9, max edge hit count: 60
+RNG seed: 12345
+Raw input saved to crash.bin
+[ankurg@maple srcFiles6]$
+[ankurg@maple srcFiles6]$ for i in $(seq 1 10); do
+    echo -n "Trial $i: "
+    grep -E "Crash-inducing test case \(text\)|Number of test cases|Wall clock time" \
+        "trial$i/trial.log" | tr '\n' ' '
+    echo
+done
+Trial 1:
+Trial 2:
+Trial 3:
+Trial 4:
+Trial 5:
+Trial 6:
+Trial 7:
+Trial 8: Crash-inducing test case (text): S0s Number of test cases: 695 Wall clock time: 6 seconds
+Trial 9: Crash-inducing test case (text): S0s Number of test cases: 99 Wall clock time: 1 seconds
+Trial 10: Crash-inducing test case (text): S0s Number of test cases: 506 Wall clock time: 4 seconds
+[ankurg@maple srcFiles6]$ python3 stats.py trial*/trial.log
+trial10/trial.log: input=S0s test_cases=506 time=4s
+trial1/trial.log: input=S0s test_cases=872 time=8s
+trial2/trial.log: input=S0s test_cases=1,715 time=13s
+trial3/trial.log: skipped (no crash yet, or log is corrupted)
+trial4/trial.log: input=S0s test_cases=1,966 time=13s
+trial5/trial.log: skipped (no crash yet, or log is corrupted)
+trial6/trial.log: input=S0s test_cases=1,273 time=11s
+trial7/trial.log: input=S0s test_cases=987 time=9s
+trial8/trial.log: input=S0s test_cases=695 time=6s
+trial9/trial.log: input=S0s test_cases=99 time=1s
+
+All trials found the same input: yes
+Trials: 8
+Average number of test cases: 1,014
+Std. dev. number of test cases: 619
+Average wall clock time: 8 seconds
+Std. dev. wall clock time: 4 seconds
+[ankurg@maple srcFiles6]$ python3 stats.py trial*/trial.log
+trial10/trial.log: input=S0s test_cases=506 time=4s
+trial1/trial.log: input=S0s test_cases=872 time=8s
+trial2/trial.log: input=S0s test_cases=1,715 time=13s
+trial3/trial.log: input=S0s test_cases=4,331 time=19s
+trial4/trial.log: input=S0s test_cases=1,966 time=13s
+trial5/trial.log: input=S0s test_cases=6,950 time=24s
+trial6/trial.log: input=S0s test_cases=1,273 time=11s
+trial7/trial.log: input=S0s test_cases=987 time=9s
+trial8/trial.log: input=S0s test_cases=695 time=6s
+trial9/trial.log: input=S0s test_cases=99 time=1s
+
+All trials found the same input: yes
+Trials: 10
+Average number of test cases: 1,939
+Std. dev. number of test cases: 2,118
+Average wall clock time: 11 seconds
+Std. dev. wall clock time: 7 seconds
+[ankurg@maple srcFiles6]$ tail -n 10 trial3/trial.log
+tail -n 10 trial5/trial.log
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 53 30 73
+Crash-inducing test case (text): S0s
+Replay with: ./targetCovLoop 'S0s'
+Number of test cases: 4331
+Wall clock time: 19 seconds
+Seeds in pool: 9, edges covered: 9, max edge hit count: 60
+RNG seed: 12348
+Raw input saved to crash.bin
+=== CRASH FOUND ===
+Signal: 4 (Illegal instruction)
+Crash-inducing test case (hex): 53 30 73
+Crash-inducing test case (text): S0s
+Replay with: ./targetCovLoop 'S0s'
+Number of test cases: 6950
+Wall clock time: 24 seconds
+Seeds in pool: 10, edges covered: 9, max edge hit count: 60
+RNG seed: 12350
+Raw input saved to crash.bin
+[ankurg@maple srcFiles6]$
+[ankurg@maple obj7]$ cd ~/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8
+
+curl -fLO https://courses.cs.vt.edu/~cs4264/static/fuzzing/targetAbnormal.c
+
+make
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   709  100   709    0     0   3270      0 --:--:-- --:--:-- --:--:--  3282
+gcc -O2 -Wall -Wextra -D_POSIX_C_SOURCE=200809L -o fuzzer obj8.c runner.c
+clang -O1 -g -c -o cov_handlers.o cov_handlers.c
+clang -O1 -g -fsanitize-coverage=inline-8bit-counters -c -o targetAbnormal.o targetAbnormal.c
+clang -o targetAbnormal targetAbnormal.o cov_handlers.o
+[ankurg@maple srcFiles8]$ mkdir -p ~/project3-runs/smoke8
+cd ~/project3-runs/smoke8
+
+mkdir -p seeds
+cp ~/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8/seeds/* seeds/
+
+"$HOME/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8/fuzzer" \
+"$HOME/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8/targetAbnormal" \
+100 12345 10
+Objective 8 start target=/home/ugrads/majors/ankurg/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8/targetAbnormal timeout=100 rng=12345 duration=10.0
+Initial seed: seeds/seed1.txt contents=S0a
+Initial seed: seeds/seed3.txt contents=X9z
+Initial seed: seeds/seed2.txt contents=A1b
+[0.4s] NEW CRASH S0s signal=4
+[1.7s] NEW TIMEOUT 007 signal=0
+[5.5s] NEW CRASH Mi5 signal=4
+=== TRIAL COMPLETE ===
+Objective: 8
+Per-test-case timeout: 100 milliseconds
+RNG seed: 12345
+Rlogin node: maple.rlogin
+Number of test cases: 3170
+Wall clock time: 10.003 seconds
+Test case throughput: 316.894 test cases per second
+Total crash events: 7
+Distinct crash-inducing inputs: 2
+Total timeout events: 2
+Distinct timeout-inducing inputs: 1
+Execution failures: 0
+Edges covered: 12
+Crash-inducing test case: S0s; signal: 4; occurrences: 5; first found: 0.418 seconds
+Crash-inducing test case: Mi5; signal: 4; occurrences: 2; first found: 5.482 seconds
+Timeout-inducing test case: 007; occurrences: 2; first found: 1.731 seconds
+[ankurg@maple smoke8]$
+[ankurg@maple smoke8]$ mkdir -p ~/project3-runs/obj8
+cd ~/project3-runs/obj8
+
+mkdir -p seeds
+cp ~/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8/seeds/* seeds/
+
+hostname > node.txt
+
+nohup "$HOME/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8/fuzzer" \
+"$HOME/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8/targetAbnormal" \
+100 80001 86400 > trial.log 2>&1 < /dev/null &
+
+echo "Objective 8 PID: $!"
+[2] 2033980
+Objective 8 PID: 2033980
+[ankurg@maple obj8]$ sleep 3
+tail -n 15 trial.log
+ps -u "$USER" -o pid,etime,args | grep '[f]uzzer'
+[7.7s] NEW TIMEOUT MGz signal=0
+[8.5s] NEW TIMEOUT SCz signal=0
+[8.6s] NEW TIMEOUT 09y signal=0
+[8.7s] NEW TIMEOUT eBz signal=0
+[8.8s] NEW TIMEOUT w9z signal=0
+[8.9s] NEW TIMEOUT n9z signal=0
+[9.0s] NEW TIMEOUT KBz signal=0
+[9.1s] NEW TIMEOUT M9K signal=0
+[9.2s] NEW TIMEOUT g9z signal=0
+[9.3s] NEW TIMEOUT Mia signal=0
+[9.4s] NEW TIMEOUT 8iz signal=0
+[9.5s] NEW TIMEOUT 09j signal=0
+[9.6s] NEW TIMEOUT k0z signal=0
+[9.7s] NEW TIMEOUT w0z signal=0
+[11.0s] NEW TIMEOUT d9z signal=0
+1936548       03:58 /home/ugrads/majors/ankurg/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles7fuzzer /home/ugrads/majors/ankurg/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles7/targetAbnormal 100 70001 86400
+2033980       00:12 /home/ugrads/majors/ankurg/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8fuzzer /home/ugrads/majors/ankurg/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles8/targetAbnormal 100 80001 86400
+[ankurg@maple obj8]$ ls -la interesting/
+total 4
+drwxr-xr-x 2 ankurg Majors 7 Oct 29 18:32 .
+drwxr-xr-x 4 ankurg Majors 4 Oct 29 18:33 ..
+-rw-r--r-- 1 ankurg Majors 3 Oct 29 18:32 seed_00000001.txt
+-rw-r--r-- 1 ankurg Majors 3 Oct 29 18:32 seed_00000002.txt
+-rw-r--r-- 1 ankurg Majors 3 Oct 29 18:32 seed_00000003.txt
+-rw-r--r-- 1 ankurg Majors 3 Oct 29 18:32 seed_00000004.txt
+-rw-r--r-- 1 ankurg Majors 3 Oct 29 18:32 seed_00000005.txt
+-rw-r--r-- 1 ankurg Majors 3 Oct 29 18:32 seed_00000006.txt
+-rw-r--r-- 1 ankurg Majors 3 Oct 29 18:32 seed_00000007.txt
+[ankurg@maple obj8]$
+[ankurg@maple obj8]$ cd ~/project3/project3_obj6_to_obj9_integrated/project3_ready/srcFiles9
+
+ls -lh
+make
+
+clang --version
+clang++ --version
+cmake --version
+total 14K
+-rw-r--r-- 1 ankurg Majors 2.2K Oct 29 18:08 cov_handlers.c
+-rw-r--r-- 1 ankurg Majors  323 Oct 29 18:08 Makefile
+-rw-r--r-- 1 ankurg Majors 6.7K Oct 29 18:08 obj9.c
+-rw-r--r-- 1 ankurg Majors 3.4K Oct 29 18:08 runner.c
+-rw-r--r-- 1 ankurg Majors  413 Oct 29 18:08 runner.h
+gcc -O2 -Wall -Wextra -D_POSIX_C_SOURCE=200809L -o fuzzer obj9.c runner.c
+clang version 21.1.8 (RESF 21.1.8-1.el10)
+Target: x86_64-redhat-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+Configuration file: /etc/clang/x86_64-redhat-linux-gnu-clang.cfg
+clang version 21.1.8 (RESF 21.1.8-1.el10)
+Target: x86_64-redhat-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+Configuration file: /etc/clang/x86_64-redhat-linux-gnu-clang++.cfg
+cmake version 3.31.8
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+[ankurg@maple srcFiles9]$ which pdftotext
+pdftotext -v
+/usr/bin/which: no pdftotext in (/home/ugrads/majors/ankurg/.local/bin:/home/ugrads/majors/ankurg/bin:/home/courses/cs3214/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/ugrads/majors/ankurg/.composer/vendor/bin:/var/lib/snapd/snap/bin)
+-bash: pdftotext: command not found
+[ankurg@maple srcFiles9]$
